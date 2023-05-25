@@ -14,8 +14,7 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-        required: true,
-      mini: [6, "You should enter 6 word"]
+      required: true,
     },
     phone: {
       type: String,
