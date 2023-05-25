@@ -7,6 +7,8 @@ import Contact from './Pages/Contact';
 import Category from './Pages/Category';
 import Policy from './Pages/Policy';
 import NotFound from './Pages/NotFound';
+import Register from './Pages/Auth/Register';
+import Login from './Pages/Auth/Login';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path='/contact' element={<Contact/>} />
         <Route path='/category' element={<Category/>} />
         <Route path='/policy' element={<Policy/>} />
+        <Route path='/register' element={<Register/>} />
+        <Route path='/login' element={<Login/>} />
         <Route path='/*' element={<NotFound/>} />
       </Routes>
     </>
