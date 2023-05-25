@@ -1,15 +1,31 @@
-import React from 'react';
-import Navbar from './Header';
-import Footer from './Footer';
+import React from "react";
 
-const Layout = (props) => {
-    return (
-      <div>
-        <Navbar/>
-            <main style={{minHeight: "80vh"}}>{props.children}</main>
-            <Footer/>
-      </div>
-    );
+import Footer from "./Footer";
+import { Helmet } from "react-helmet";
+import Header from "./Header";
+
+const Layout = ({ children, title, description, keywords, author }) => {
+  return (
+    <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="author" content={author} />
+        <meta name={"keywords"} content={keywords} />
+        <link rel="canonical" href="http://internbangla.com" />
+      </Helmet>
+      <Header />
+      <main style={{ minHeight: "70vh" }}>{children}</main>
+      <Footer />
+    </div>
+  );
 };
 
+Layout.defaultProps = {
+  title: "Dolly - Shop now",
+  name: "Dolly Shop",
+  author: "Pobarul islam",
+  keywords: "daraz.com, mern stack project, ecommarce project, online shop",
+};
 export default Layout;

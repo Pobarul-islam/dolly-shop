@@ -27,7 +27,7 @@ const Header = () => {
        </>
      );
     return (
-      <div>
+   
         <div className="navbar uppercase  bg-slate-700 sticky top-0 z-10 text-white">
           <div className="navbar-start">
             <div className="dropdown text-white">
@@ -65,7 +65,7 @@ const Header = () => {
             <ul className="menu menu-horizontal px-1">{menuItems}</ul>
           </div>
         </div>
-      </div>
+   
     );
 };
 
