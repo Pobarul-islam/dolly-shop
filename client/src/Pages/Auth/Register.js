@@ -16,7 +16,7 @@ const Register = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`/api/v1/auth/register`, {
+      const res = await axios.post("/api/v1/auth/register", {
         name,
         email,
         phone,
@@ -24,7 +24,7 @@ const Register = () => {
         password,
       });
       if (res.data.success) {
-        toast.success("res.data.message");
+        toast.success(res.data.message);
         navigate("/");
       } else {
         toast.error(res.data.message);
@@ -34,7 +34,7 @@ const Register = () => {
       toast.error("Something went error");
     }
   };
-  console.log(process.env.REACT_APP_API);
+
   return (
     <Layout>
       <div className=" min-h-screen bg-base-200">

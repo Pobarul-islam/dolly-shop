@@ -9,6 +9,7 @@ import Policy from './Pages/Policy';
 import NotFound from './Pages/NotFound';
 import Register from './Pages/Auth/Register';
 import Login from './Pages/Auth/Login';
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
