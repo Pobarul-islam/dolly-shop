@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Layout from "../../Components/Layout";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -8,14 +10,31 @@ const Register = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   // from functionality
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-      console.log(name, email, address, phone, password);
-      toast.success("Success")
+    try {
+      const res = await axios.post(`/api/v1/auth/register`, {
+        name,
+        email,
+        phone,
+        address,
+        password,
+      });
+      if (res.data.success) {
+        toast.success("res.data.message");
+        navigate("/");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went error");
+    }
   };
+  console.log(process.env.REACT_APP_API);
   return (
     <Layout>
       <div className=" min-h-screen bg-base-200">
