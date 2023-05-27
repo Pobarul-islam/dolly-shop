@@ -1,8 +1,18 @@
 import React from 'react';
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-
+import { useAuth } from '../Context/auth';
+import { toast } from 'react-toastify';
+  import "react-toastify/dist/ReactToastify.css";
 const Header = () => {
+  const handleLogout = () => {
+    setAuth({
+      ...auth, user:null, token:''
+    })
+    localStorage.removeItem('auth');
+    toast.success("Logout successfully")
+  }
+  const [auth, setAuth] = useAuth();
      const menuItems = (
        <>
          <li>
@@ -15,12 +25,23 @@ const Header = () => {
          <li>
            <Link to="/category">category</Link>
          </li>
-         <li>
-           <Link to="/register">Register</Link>
-         </li>
-         <li>
-           <Link to="/login">Login</Link>
-         </li>
+         {!auth.user ? (
+           <>
+             <li>
+               <Link to="/register">Register</Link>
+             </li>
+             <li>
+               <Link to="/login">Login</Link>
+             </li>
+           </>
+         ) : (
+           <>
+             {" "}
+             <li>
+               <Link onClick={handleLogout} to="/login">Logout</Link>
+             </li>
+           </>
+         )}
          <li>
            <Link to="/cart">Cart (0)</Link>
          </li>
