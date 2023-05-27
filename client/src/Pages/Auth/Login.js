@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../Components/Layout";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/auth";
 
 const Login = () => {
@@ -10,8 +10,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  // from functionality
+  const location = useLocation();
 
+  // from functionality
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -28,7 +29,7 @@ const Login = () => {
           token: res.data.token,
         });
         localStorage.setItem("auth", JSON.stringify(res.data));
-        navigate("/");
+        navigate(location.state || "/");
       } else {
         toast.error(res.data.message);
       }

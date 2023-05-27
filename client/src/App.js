@@ -22,8 +22,10 @@ function App() {
         <Route path="/category" element={<Category />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<PrivateRoute />} />
-        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<PrivateRoute/>}>
+        <Route path="" element={<Dashboard/>}></Route>
+        </Route>
+
         <Route path="/login" element={<Login />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
