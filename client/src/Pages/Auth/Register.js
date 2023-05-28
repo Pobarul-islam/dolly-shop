@@ -10,6 +10,7 @@ const Register = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [answer, setAnswer] = useState("");
   const navigate = useNavigate();
   // from functionality
 
@@ -22,6 +23,7 @@ const Register = () => {
         phone,
         address,
         password,
+        answer
       });
       if (res.data.success) {
         toast.success(res.data.message);
@@ -83,6 +85,16 @@ const Register = () => {
               </div>
               <div className="form-control">
                 <input
+                  type="text"
+                  placeholder="what is your favorite sports"
+                  className="input input-bordered"
+                  required
+                  value={answer}
+                  onChange={(e) => setAnswer(e.target.value)}
+                />
+              </div>
+              <div className="form-control">
+                <input
                   type="password"
                   placeholder="Password"
                   className="input input-bordered"
@@ -90,11 +102,7 @@ const Register = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
+              
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
