@@ -36,10 +36,24 @@ const Header = () => {
            </>
          ) : (
            <>
-             {" "}
-             <li>
-               <Link onClick={handleLogout} to="/login">Logout</Link>
-             </li>
+             <div className="dropdown text-black">
+               <label tabIndex={0} className="btn  m-1">
+                 {auth?.user?.name}
+               </label>
+               <ul
+                 tabIndex={0}
+                 className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+               >
+                 <li>
+                   <a>Dashboard</a>
+                 </li>
+                 <li>
+                   <Link onClick={handleLogout} to="/login">
+                     Logout
+                   </Link>
+                 </li>
+               </ul>
+             </div>
            </>
          )}
          <li>
