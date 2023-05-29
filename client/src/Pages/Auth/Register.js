@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../Components/Layout";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -43,6 +43,7 @@ const Register = () => {
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="card flex-shrink-0 mt-10 w-full max-w-sm shadow-2xl bg-base-100">
             <form onSubmit={handleOnSubmit} className="card-body">
+              <h2 className="text-center text-3xl p-3">Register</h2>
               <div className="form-control">
                 <input
                   type="text"
@@ -102,11 +103,14 @@ const Register = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-              
               </div>
+
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
               </div>
+              <Link to="/login" className="text-red-500">
+                Already have an account ? Please Login
+              </Link>
             </form>
           </div>
         </div>

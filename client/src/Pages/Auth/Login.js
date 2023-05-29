@@ -45,6 +45,7 @@ const Login = () => {
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="card flex-shrink-0 mt-10 w-full max-w-sm shadow-2xl bg-base-100">
             <form onSubmit={handleOnSubmit} className="card-body">
+              <h2 className="text-3xl text-center p-3">Login</h2>
               <div className="form-control">
                 <input
                   type="email"
@@ -66,18 +67,32 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+
+              <Link
+                to="/forgot-password"
+                onClick={() => {
+                  navigate("/forgot-password");
+                }}
+                href="#"
+                className="label-text-alt link link-hover text-red-600 font-bold"
+              >
+                Forgot password ?
+              </Link>
+
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
               </div>
               <button className="label">
-                <Link to="/forgot-password"
+                <Link
+                  to="/register"
                   onClick={() => {
-                    navigate("/forgot-password");
+                    navigate("/");
                   }}
                   href="#"
-                  className="label-text-alt link link-hover"
+                  className="label-text-alt  link link-hover font-bold"
                 >
-                  Forgot password?
+                  <span className="text-red-500"> New to Dolly shop ?</span>{" "}
+                  <span className=""> Create new account</span>
                 </Link>
               </button>
             </form>
