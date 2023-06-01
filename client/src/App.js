@@ -17,6 +17,8 @@ import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import CreateCategory from "./Pages/Admin/CreateCategory";
 import CreateProduct from "./Pages/Admin/CreateProduct";
 import Users from "./Pages/Admin/Users";
+import Orders from "./Pages/user/Orders";
+import Profile from "./Pages/user/Profile";
 
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
 
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<Dashboard />} />
+          <Route path="user/orders" element={<Orders />} />
+          <Route path="user/profile" element={<Profile />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
