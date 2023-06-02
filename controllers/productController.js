@@ -47,24 +47,50 @@ export const createProductController = async (req, res) => {
   }
 };
 
-
-// get all products 
+// get all products
 export const getProductController = async (req, res) => {
-    try {
-        const products = await productModel.find({}).select("-photo").limit(12).sort({ createdAd: -1 })
-        res.status(201).send({
-            success: true,
-            counttotal: products.length,
-            message: "All Products",
-            products,
+  try {
+    const products = await productModel
+      .find({})
+      .populate("category")
+      .select("-photo")
+      .limit(12)
+      .sort({ createdAt: -1 });
+    res.status(200).send({
+      success: true,
+      counttotal: products.length,
+      message: "All Products",
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in getting products",
+      error: error.message,
+    });
+  }
+};
 
-        })
-    } catch (error) {
-        console.log(error)
-        res.status(500).send({
-            success: false,
-            message: "Error in getting products",
-            error: error.message
-        })
-    }
-}
+// get single product
+
+export const getSingleProductController = async (req, res) => {
+  try {
+    const product = await productModel
+      .findOne({ slug: req.params.slug })
+      .select("-photo")
+      .populate("category");
+    res.status(200).send({
+      success: true,
+      message: "Single Product Featched",
+      product,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error while geting single product",
+      error,
+    });
+  }
+};
