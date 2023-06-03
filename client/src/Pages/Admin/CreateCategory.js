@@ -3,8 +3,30 @@ import Layout from "../../Components/Layout";
 import AdminMenu from "../../Components/Layout/AdminMenu";
 import { toast } from "react-toastify";
 import axios from "axios";
+import CategoryForm from "../../Components/Form/CategoryForm";
 
 const CreateCategory = () => {
+  const [name, setName] = useState([]);
+
+  // handle form
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post("/api/v1/category/create-category", {
+        name,
+      });
+      if (data?.success) {
+        toast.success(`${name} is created`);
+        getAllCategory();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong in input form");
+    }
+  };
+
   const [categories, setCategories] = useState([]);
 
   // get all category
@@ -16,7 +38,6 @@ const CreateCategory = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something wen wrong in getting category");
     }
   };
 
@@ -26,35 +47,39 @@ const CreateCategory = () => {
 
   return (
     <Layout title="Dashboard - Create-category">
-      <div className="grid lg:grid-cols-4 gap-40">
+      <div className="grid lg:grid-cols-2 gap-40">
         <div>
           <AdminMenu />
         </div>
-        <div>
-          <h2 className="text-2xl font-bold p-2">Manage Category</h2>
-          <div className="p-3 m-3">
-            <table className="table">
-              {/* head */}
-              <thead>
-                <tr>
-                
-                  <th>Name</th>
-                  <th>Category</th>
-              
-                </tr>
-              </thead>
-              <tbody className="border">
-                <tr>
-                  {categories.map((c) => (
-                    <td key={c._id}>{c.name} </td>
-                  
-                  ))}
-                  <td></td>
-                </tr>
-                
-              </tbody>
-            </table>
+
+        <div className="table">
+          <h2>Manage Category</h2>
+          <div className="p-3">
+            <CategoryForm
+              handleSubmit={handleSubmit}
+              value={name}
+              setValue={setName}
+            />
           </div>
+          <table className=" w-96 gap-4">
+            <thead>
+              <tr>
+                <th> Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {categories?.map((c) => (
+                <>
+                  <tr>
+                    <td key={c._id}>{c.name} </td>
+
+                    <td className="btn btn-outline">Edit</td>
+                  </tr>
+                </>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </Layout>
@@ -62,5 +87,3 @@ const CreateCategory = () => {
 };
 
 export default CreateCategory;
-
-

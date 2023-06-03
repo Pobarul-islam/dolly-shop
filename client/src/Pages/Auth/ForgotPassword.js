@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../Components/Layout";
 import { toast } from "react-toastify";
 import axios from "axios";
-import {  useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 
 
 const ForgotPassword = () => {
@@ -73,6 +73,7 @@ const ForgotPassword = () => {
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
               </div>
+              <Link to="/login" className="text-red-500 font-bold">Login</Link>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Reset</button>
               </div>
