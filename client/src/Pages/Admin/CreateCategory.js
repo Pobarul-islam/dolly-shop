@@ -71,6 +71,23 @@ const CreateCategory = () => {
       toast.error("Something went wrong");
     }
   };
+  // Delete category
+  const handleDelete = async (pId) => {
+    try {
+      const { data } = await axios.delete(
+        `/api/v1/category/delete-category/${pId}`
+      );
+      if (data.success) {
+        toast.success(`Category is deleted`);
+          getAllCategory();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+  };
   return (
     <Layout title="Dashboard - Create-category">
       <div className="grid lg:grid-cols-2 gap-40">
@@ -107,13 +124,20 @@ const CreateCategory = () => {
                         onClick={() => {
                           setVisible(true);
                           setUpdatedName(c.name);
-                          SetSelected(c)
+                          SetSelected(c);
                         }}
                       >
                         Edit
                       </label>
 
-                      <td className="btn btn-outline m-2">Delete</td>
+                      <button
+                        className="btn btn-outline m-2"
+                        onClick={() => {
+                          handleDelete(c._id);
+                        }}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </tr>
                 </>
