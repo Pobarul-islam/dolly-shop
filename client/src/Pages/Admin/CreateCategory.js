@@ -4,9 +4,14 @@ import AdminMenu from "../../Components/Layout/AdminMenu";
 import { toast } from "react-toastify";
 import axios from "axios";
 import CategoryForm from "../../Components/Form/CategoryForm";
+import { Modal } from "antd";
 
 const CreateCategory = () => {
+  const [visible, setVisible] = useState(false);
   const [name, setName] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selected, SetSelected] = useState(null);
+  const [updateName, setUpdatedName] = useState("");
 
   // handle form
   const handleSubmit = async (e) => {
@@ -23,11 +28,9 @@ const CreateCategory = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong in input form");
+      toast.error("Something went wrong");
     }
   };
-
-  const [categories, setCategories] = useState([]);
 
   // get all category
   const getAllCategory = async () => {
@@ -45,6 +48,29 @@ const CreateCategory = () => {
     getAllCategory();
   }, []);
 
+  // update category
+  const handleUpdated = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.put(
+        `/api/v1/category/update-category/${selected._id}`,
+        { name: updateName }
+      );
+      if (data.success) {
+        toast.success(`${updateName} is updated`);
+        SetSelected(null);
+        setUpdatedName("");
+        setVisible(false);
+        getAllCategory();
+      } else {
+        toast.error(data.message);
+      }
+      console.log(e);
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+  };
   return (
     <Layout title="Dashboard - Create-category">
       <div className="grid lg:grid-cols-2 gap-40">
@@ -61,7 +87,7 @@ const CreateCategory = () => {
               setValue={setName}
             />
           </div>
-          <table className=" w-96 gap-4">
+          <table className=" w-96 gap-4 ">
             <thead>
               <tr>
                 <th> Name</th>
@@ -74,12 +100,42 @@ const CreateCategory = () => {
                   <tr>
                     <td key={c._id}>{c.name} </td>
 
-                    <td className="btn btn-outline">Edit</td>
+                    <div>
+                      <label
+                        htmlFor="my_modal_6"
+                        className="btn btn-outline m-2"
+                        onClick={() => {
+                          setVisible(true);
+                          setUpdatedName(c.name);
+                          SetSelected(c)
+                        }}
+                      >
+                        Edit
+                      </label>
+
+                      <td className="btn btn-outline m-2">Delete</td>
+                    </div>
                   </tr>
                 </>
               ))}
             </tbody>
           </table>
+        </div>
+        {/* Put this part before </body> tag */}
+        <input type="checkbox" id="my_modal_6" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box">
+            <CategoryForm
+              value={updateName}
+              setValue={setUpdatedName}
+              handleSubmit={handleUpdated}
+            />
+            <div className="modal-action">
+              <label htmlFor="my_modal_6" className="btn">
+                Close!
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </Layout>

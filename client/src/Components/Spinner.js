@@ -18,7 +18,7 @@ const Spinner = ({path="login"}) => {
     },[count, navigate, location, path ])
   return (
     <div>
-      <h1 className="text-3xl hero">redirecting to you in {count} second </h1>
+      {/* <h1 className="text-3xl hero">redirecting to you in {count} second </h1> */}
       <div className="hero min-h-screen">
         <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-red-400"></div>
       </div>

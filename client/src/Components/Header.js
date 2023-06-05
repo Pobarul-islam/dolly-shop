@@ -100,7 +100,7 @@ const Header = () => {
         </div>
         <div className="dropdown dropdown-end text-black">
           <label tabIndex={0} className="btn btn-ghost">
-            <div className="w-10 btn rounded-full">
+            <div className="w-102 btn rounded-full">
              
               {auth?.user?.name}
             </div>

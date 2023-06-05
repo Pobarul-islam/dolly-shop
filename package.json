@@ -14,6 +14,7 @@
   "author": "dolly shop",
   "license": "ISC",
   "dependencies": {
+    "antd": "^5.5.2",
     "bcrypt": "^5.1.0",
     "concurrently": "^8.0.1",
     "cors": "^2.8.5",
