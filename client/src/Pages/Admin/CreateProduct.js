@@ -3,6 +3,8 @@ import Layout from "../../Components/Layout";
 import AdminMenu from "../../Components/Layout/AdminMenu";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Select } from "antd";
+const { Option } = Select;
 
 const CreateProduct = () => {
   const [categories, setCategories] = useState([]);
@@ -41,20 +43,22 @@ const CreateProduct = () => {
         </div>
         <div className="m-3">
           <h2>Create Product</h2>
-          <select
-            className="select select-primary form-select mb-3 w-96 max-w-xs"
+          <Select
+            bordered={false}
+            placeholder="Select a category"
+            size="large"
             showSearch
-           
+            className="form-select m-3 w-96 border"
+            onChange={(value) => {
+              setCategory(value);
+            }}
           >
-            <option disabled selected>
-              <p>Select a category...</p>
-            </option>
             {categories?.map((c) => (
-              <option key={c._id} value={c._id}>
+              <Option key={c._id} value={c._id}>
                 {c.name}
-              </option>
+              </Option>
             ))}
-          </select>
+          </Select>
           <h3 className="text-3xl">cat is {categories.length} </h3>
         </div>
         <div className="m-3 p-2"></div>
