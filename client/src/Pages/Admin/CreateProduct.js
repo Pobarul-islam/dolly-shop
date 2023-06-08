@@ -45,7 +45,7 @@ const CreateProduct = () => {
           <h2>Create Product</h2>
           <Select
             bordered={false}
-            placeholder="Select a category"
+            placeholder="Search to Select"
             size="large"
             showSearch
             className="form-select m-3 w-96 border"
@@ -59,9 +59,31 @@ const CreateProduct = () => {
               </Option>
             ))}
           </Select>
-          <h3 className="text-3xl">cat is {categories.length} </h3>
+          <div className="mb-3">
+            <label className="btn btn-outline w-96 ">
+              {photo ? photo.name : "Upload Photo"}
+              <input
+                type="file"
+                name="photo"
+                accept="image/*"
+                onChange={(e) => setPhoto(e.target.files[0])}
+                hidden
+              />
+            </label>
+          </div>
+          <div className="hero container max-w-screen-lg mx-auto pb-10">
+            {photo && (
+              <div className="text-center">
+                <img
+               
+                  src={URL.createObjectURL(photo)}
+                  style={{ height: "200px" }}
+                  alt="product_photo"
+                />
+              </div>
+            )}
+          </div>
         </div>
-        <div className="m-3 p-2"></div>
       </div>
     </Layout>
   );

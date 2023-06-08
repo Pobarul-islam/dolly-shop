@@ -74,7 +74,7 @@ const Login = () => {
                   navigate("/forgot-password");
                 }}
                 href="#"
-                className="label-text-alt link link-hover text-red-600 font-bold"
+                className="label-text-alt link link-hover text-red-5p00 font-bold"
               >
                 Forgot password ?
               </Link>
