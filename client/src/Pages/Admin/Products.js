@@ -3,6 +3,7 @@ import Layout from "../../Components/Layout";
 import { toast } from "react-toastify";
 import axios from "axios";
 import AdminMenu from "../../Components/Layout/AdminMenu";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -24,34 +25,36 @@ const Products = () => {
   }, []);
   return (
     <Layout>
-      <div className="row flex">
-        <div>
-          <AdminMenu/>
-        </div>
-    
-        <div className=" grid lg:grid-cols-3 gap-4 p-4">
-          {products.map((p) => (
-            <div key={p._id}>
-              {" "}
-              <div
-                className="card card-compact bg-base-100 shadow-xl"
-                key={p._id}
-              >
-                <figure>
-                  <img className="w-96" src={p.photo} alt={p.name} />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">{p.name} </h2>
-                  <p>{p.description} </p>
-                  <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Buy Now</button>
+     
+        <div className="flex">
+          <div>
+            <AdminMenu />
+          </div>
+
+          <div className=" p-4 grid gap-4 m-4 lg:grid-cols-3">
+            {products.map((p) => (
+              <Link to={`/dashboard/admin/product/${p.slug}`} key={p._id}>
+                {" "}
+                <div
+                  className="card card-compact bg-base-100 shadow-xl"
+                  key={p._id}
+                >
+                  <figure>
+                    <img className="w-96 h-72" src={`/api/v1/product/product-photo/${p._id}`} alt={p.name} />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">{p.name} </h2>
+                    <p>{p.description} </p>
+                    <div className="card-actions justify-end">
+                      <button className="btn btn-primary">Buy Now</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+  
     </Layout>
   );
 };
