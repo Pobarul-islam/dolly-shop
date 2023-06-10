@@ -123,7 +123,7 @@ export const deleteProductController = async (req, res) => {
         res.status(200).send({
             success: true,
             message: "Product Deleted Successfully",
-            product
+            products,
 
         })
     } catch (error) {

@@ -6,7 +6,7 @@ export const registerController = async (req, res) => {
   try {
     const { name, email, password, phone, address, answer } = req.body;
 
-    // validations
+    // validationsf
     if (!name) {
       return res.send({ message: "Name is Required" });
     }
@@ -104,7 +104,7 @@ export const loginController = async (req, res) => {
         address: user.address,
         role: user.role,
       },
-      token
+      token,
     });
   } catch (error) {
     console.log(error);
@@ -116,8 +116,7 @@ export const loginController = async (req, res) => {
   }
 };
 
-
-// forgot password controller 
+// forgot password controller
 export const forgotPasswordController = async (req, res) => {
   try {
     const { email, answer, newPassword } = req.body;
@@ -155,8 +154,7 @@ export const forgotPasswordController = async (req, res) => {
   }
 };
 
-
-// test controller 
+// test controller
 export const testController = (req, res) => {
-  res.send('Protected Route')
-}
+  res.send("Protected Route");
+};

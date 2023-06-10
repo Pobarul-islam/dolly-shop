@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 
 const AdminMenu = () => {
   return (
-      <div className="m-2">
-          <h2 className="text-center text-purple-500 font-bold">Admin Dashboard</h2>
-      {" "}
+    <div className="m-2">
+      <h2 className="text-center text-purple-500 font-bold">Admin Dashboard</h2>{" "}
       <ul className="bg-white shadow-md rounded-lg divide-y divide-gray-200">
         <li className="px-6 py-4 hover:bg-gray-100">
           <a href="#" className="flex items-center space-x-2">
@@ -31,6 +30,19 @@ const AdminMenu = () => {
             >
               Create Product
             </Link>
+          </a>
+        </li>
+        <li className="px-6 py-4 hover:bg-gray-100">
+          <a href="#" className="flex items-center space-x-2">
+            <span className="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center">
+              <i className="fas fa-check" />
+            </span>
+            <a>
+              {" "}
+              <Link to="/dashboard/admin/products" className="text-gray-800">
+                Product
+              </Link>
+            </a>
           </a>
         </li>
         <li className="px-6 py-4 hover:bg-gray-100">

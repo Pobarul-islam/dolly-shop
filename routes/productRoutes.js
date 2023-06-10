@@ -22,7 +22,7 @@ router.put(
   updateProductController
 );
 
-
+ 
 // get products 
 router.get('/get-product', getProductController);
 
