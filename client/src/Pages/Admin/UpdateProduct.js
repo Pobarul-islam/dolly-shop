@@ -22,6 +22,7 @@ const UpdateProduct = () => {
 
   // get single product
 
+  //get single product
   const getSingleProduct = async () => {
     try {
       const { data } = await axios.get(
@@ -30,21 +31,19 @@ const UpdateProduct = () => {
       setName(data.product.name);
       setId(data.product._id);
       setDescription(data.product.description);
-      setCategory(data.product.category);
-      setPhoto(data.product.photo);
+      setPrice(data.product.price);
       setPrice(data.product.price);
       setQuentity(data.product.quantity);
       setShipping(data.product.shipping);
+      setCategory(data.product.category._id);
     } catch (error) {
       console.log(error);
     }
   };
-
   useEffect(() => {
     getSingleProduct();
-    // eslint-disable-next
+    //eslint-disable-next-line
   }, []);
-
   // get all category
   const getAllCategory = async () => {
     try {
@@ -62,7 +61,7 @@ const UpdateProduct = () => {
     getAllCategory();
   }, []);
 
-  // create product function
+  //create product function
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
@@ -73,22 +72,21 @@ const UpdateProduct = () => {
       productData.append("quantity", quantity);
       photo && productData.append("photo", photo);
       productData.append("category", category);
-
-      const { data } = axios.post(
-        `/api/v1/update/update-product/${id}`,
+      const { data } = axios.put(
+        `/api/v1/product/update-product/${id}`,
         productData
       );
       if (data?.success) {
         toast.error(data?.message);
       } else {
         toast.success("Product Updated Successfully");
+        navigate("/dashboard/admin/products");
       }
     } catch (error) {
       console.log(error);
       toast.error("something went wrong");
     }
   };
-
   return (
     <Layout title="Dashboard - Create-Product">
       <div className="grid lg:grid-cols-4 gap-40">
