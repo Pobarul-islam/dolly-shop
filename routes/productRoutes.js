@@ -37,7 +37,7 @@ router.get('/product-photo/:pid', productController)
 
 // delete product
 
-router.delete("/product", deleteProductController)
+router.delete("/delete-product/:pid", deleteProductController)
 
 
 

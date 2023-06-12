@@ -16,11 +16,9 @@ const UpdateProduct = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
-  const [quantity, setQuentity] = useState("");
+  const [quantity, setQuantity] = useState("");
   const [shipping, setShipping] = useState("");
   const [id, setId] = useState("");
-
-  // get single product
 
   //get single product
   const getSingleProduct = async () => {
@@ -32,8 +30,8 @@ const UpdateProduct = () => {
       setId(data.product._id);
       setDescription(data.product.description);
       setPrice(data.product.price);
-      setPrice(data.product.price);
-      setQuentity(data.product.quantity);
+
+      setQuantity(data.product.quantity);
       setShipping(data.product.shipping);
       setCategory(data.product.category._id);
     } catch (error) {
@@ -44,6 +42,7 @@ const UpdateProduct = () => {
     getSingleProduct();
     //eslint-disable-next-line
   }, []);
+
   // get all category
   const getAllCategory = async () => {
     try {
@@ -87,6 +86,23 @@ const UpdateProduct = () => {
       toast.error("something went wrong");
     }
   };
+
+  //delete a product
+  const handleDelete = async () => {
+    try {
+      let answer = window.prompt("Are You Sure want to delete this product ? ");
+      if (!answer) return;
+      const { data } = await axios.delete(
+        `/api/v1/product/delete-product/${id}`
+      );
+      toast.success("Product DEleted Succfully");
+      navigate("/dashboard/admin/products");
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+  }; 
+
   return (
     <Layout title="Dashboard - Create-Product">
       <div className="grid lg:grid-cols-4 gap-40">
@@ -106,7 +122,7 @@ const UpdateProduct = () => {
             onChange={(value) => {
               setCategory(value);
             }}
-            value={category.name}
+            value={category}
           >
             {categories?.map((c) => (
               <Option key={c._id} value={c._id}>
@@ -183,7 +199,7 @@ const UpdateProduct = () => {
               value={quantity}
               placeholder="Quantity"
               className="input input-bordered w-96 mt-2"
-              onChange={(e) => setQuentity(e.target.value)}
+              onChange={(e) => setQuantity(e.target.value)}
             />
           </div>
           <div>
@@ -203,10 +219,17 @@ const UpdateProduct = () => {
               <Option value="1">Yes</Option>
             </Select>
           </div>
+
           <div>
             <button className="btn btn-outline" onClick={handleUpdate}>
               {" "}
               Update Product
+            </button>
+          </div>
+          <div>
+            <button className="btn btn-outline" onClick={handleDelete}>
+              {" "}
+              Delete Product
             </button>
           </div>
         </div>
