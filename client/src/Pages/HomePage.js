@@ -101,6 +101,9 @@ const HomePage = () => {
               ))}
             </Radio.Group>
           </div>
+          <div className="flex flex-col-reverse">
+         <button className="btn btn-warning" onClick={()=>window.location.reload()}>Reset filters</button>
+          </div>
         </div>
         <div className="col-2 m-2">
           <h1 className="text-center text-2xl">All Products</h1>
