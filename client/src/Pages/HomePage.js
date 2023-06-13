@@ -10,6 +10,9 @@ const HomePage = () => {
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false)
 
   // get all category
   const getAllCategory = async () => {
@@ -25,16 +28,44 @@ const HomePage = () => {
 
   useEffect(() => {
     getAllCategory();
+    getTotal();
+
   }, []);
+
+
+  // get products 
 
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/get-product");
+      setLoading(true)
+      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      setLoading(false)
       setProducts(data.products);
+    } catch (error) {
+      setLoading(false)
+      console.log(error);
+    }
+  };
+
+  // getTotal count
+  const getTotal = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/product/product-count");
+      setTotal(data?.total);
     } catch (error) {
       console.log(error);
     }
   };
+
+
+  // load more 
+  const loadMore = async () => {
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
 
   // filter by cat
 
@@ -50,15 +81,11 @@ const HomePage = () => {
 
   useEffect(() => {
     if (!checked.length || !radio.length) getAllProducts();
-
   }, [checked.length, radio.length]);
 
-  
   useEffect(() => {
-    if(checked.length || radio.length)filterProduct()
-  }, [checked, radio])
-  
-  
+    if (checked.length || radio.length) filterProduct();
+  }, [checked, radio]);
 
   // get filtered product
 
@@ -73,7 +100,6 @@ const HomePage = () => {
       console.log(error);
     }
   };
-
 
   return (
     <Layout title={"Best offer"}>
@@ -102,7 +128,12 @@ const HomePage = () => {
             </Radio.Group>
           </div>
           <div className="flex flex-col-reverse">
-         <button className="btn btn-warning" onClick={()=>window.location.reload()}>Reset filters</button>
+            <button
+              className="btn btn-warning"
+              onClick={() => window.location.reload()}
+            >
+              Reset filters
+            </button>
           </div>
         </div>
         <div className="col-2 m-2">
@@ -123,10 +154,9 @@ const HomePage = () => {
                 </figure>
                 <div className="card-body ">
                   <h2 className="card-title">{p.name} </h2>
-                  <p>{p.description.substring(0,70)}... </p>
+                  <p>{p.description.substring(0, 70)}... </p>
                   <p>$ {p.price} </p>
                   <div className="row flex gap-4">
-                      
                     <div className="card-actions justify-end">
                       <button className="btn btn-primary uppercase">
                         More Details
@@ -142,7 +172,16 @@ const HomePage = () => {
               </div>
             ))}
           </div>
-          ;
+          <div className="m-2 p-3">
+            {products && products.length < total && (
+              <button className="btn btn-success" onClick={(e) => {
+                e.preventDefault();
+                setPage(page + 1);
+              }}>
+              {loading ? "Loading..." : "Loadmore"}
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </Layout>
