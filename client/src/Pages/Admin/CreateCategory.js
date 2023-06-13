@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../Components/Layout";
-import AdminMenu from "../../Components/Layout/AdminMenu";
+
 import { toast } from "react-toastify";
 import axios from "axios";
 import CategoryForm from "../../Components/Form/CategoryForm";
-import { Modal } from "antd";
+import Layout from "../../Components/Layout/Layout";
+import AdminMenu from "../../Components/Layout/AdminMenu";
+
 
 const CreateCategory = () => {
   const [visible, setVisible] = useState(false);
@@ -92,7 +93,7 @@ const CreateCategory = () => {
   return (
     <Layout title="Dashboard - Create-category">
       <div className="grid lg:grid-cols-2 gap-40">
-        <div>
+        <div className="w-72">
           <AdminMenu />
         </div>
 

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import Layout from "../../Components/Layout";
+
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/auth";
+import Layout from "../../Components/Layout/Layout";
 
 const Login = () => {
   const [auth, setAuth] = useAuth();

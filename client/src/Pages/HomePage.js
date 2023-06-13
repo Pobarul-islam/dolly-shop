@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../Components/Layout";
+import Layout from "../Components/Layout/Layout";
 import { useAuth } from "../Context/auth";
 import axios from "axios";
 import { Checkbox } from "antd";
@@ -32,7 +32,7 @@ const HomePage = () => {
     if (value) {
       all.push(id);
     } else {
-      all = all.filter((c) => c!== id);
+      all = all.filter((c) => c !== id);
     }
     setChecked(all);
   };

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../Components/Layout";
 import { toast } from "react-toastify";
 import axios from "axios";
-import AdminMenu from "../../Components/Layout/AdminMenu";
 import { Link } from "react-router-dom";
+import AdminMenu from "../../Components/Layout/AdminMenu";
+import Layout from "../../Components/Layout/Layout";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -15,7 +15,7 @@ const Products = () => {
       setProducts(data.products);
     } catch (error) {
       console.log(error);
-      // toast.error("Someething Went Wrong"); 
+      toast.error("Someething Went Wrong"); 
     }
   };
 
@@ -27,7 +27,7 @@ const Products = () => {
     <Layout>
      
         <div className="flex">
-          <div>
+          <div className="w-96 ">
             <AdminMenu />
           </div>
 

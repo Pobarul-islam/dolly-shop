@@ -1,14 +1,15 @@
 import React from "react";
-import Layout from "../../Components/Layout";
-import AdminMenu from "../../Components/Layout/AdminMenu";
+
 import { useAuth } from "../../Context/auth";
+import Layout from "../../Components/Layout/Layout";
+import AdminMenu from "../../Components/Layout/AdminMenu";
 const AdminDashboard = () => {
     const [auth] = useAuth();
   return (
     <Layout>
   
       <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-6 m-3 p-3">
-        <div>
+        <div className="w-72">
           <AdminMenu />
         </div>
         <div>

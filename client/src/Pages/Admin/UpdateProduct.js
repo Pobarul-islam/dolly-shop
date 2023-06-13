@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../Components/Layout";
-import AdminMenu from "../../Components/Layout/AdminMenu";
+
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
+import Layout from "../../Components/Layout/Layout";
+import AdminMenu from "../../Components/Layout/AdminMenu";
 const { Option } = Select;
 
 const UpdateProduct = () => {
@@ -107,7 +108,7 @@ const UpdateProduct = () => {
     <Layout title="Dashboard - Create-Product">
       <div className="grid lg:grid-cols-4 gap-40">
         {" "}
-        <div>
+        <div className="w-72">
           {" "}
           <AdminMenu />
         </div>
