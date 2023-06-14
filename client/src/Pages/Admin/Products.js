@@ -24,7 +24,7 @@ const Products = () => {
     getAllProducts();
   }, []);
   return (
-    <Layout>
+    <Layout> 
       <div className="flex">
         <div className="w-96 ">
           <AdminMenu />

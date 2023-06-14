@@ -88,20 +88,20 @@ const Header = () => {
           Dolly shop
         </Link>
       </div>
-      <SearchInput/>
-
+      <SearchInput />
       <div className="flex-none text-white">
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{menuItems}</ul>
         </div>
+
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
-            className=" card card-compact dropdown-content w-52 bg-base-100 shadow"
+            className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
           ></div>
         </div>
         <div className="dropdown dropdown-end text-black">
-          <label tabIndex={0}>
+          <label tabIndex={0} className="btn btn-ghost">
             <div className="w-102 btn rounded-full">{auth?.user?.name}</div>
           </label>
           <ul

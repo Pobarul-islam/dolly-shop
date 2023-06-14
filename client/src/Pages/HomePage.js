@@ -4,7 +4,10 @@ import { useAuth } from "../Context/auth";
 import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../Components/Prices";
+import { useNavigate } from "react-router-dom";
+
 const HomePage = () => {
+  const navigate = useNavigate();
   const [auth, setAuth] = useAuth();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -13,6 +16,7 @@ const HomePage = () => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  
 
   // get all category
   const getAllCategory = async () => {
@@ -163,7 +167,7 @@ const HomePage = () => {
                   <p>$ {p.price} </p>
                   <div className="row flex gap-4">
                     <div className="card-actions justify-end">
-                      <button className="btn btn-primary uppercase">
+                      <button onClick={()=>navigate(`/product/${p.slug}`)} className="btn btn-primary uppercase">
                         More Details
                       </button>
                     </div>

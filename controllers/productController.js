@@ -109,7 +109,7 @@ export const productController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Error while getting photo",
-      photo,
+   
     });
   }
 };
@@ -259,7 +259,8 @@ export const searchProductController = async (req, res) => {
           { name: { $regex: keyword, $options: "i" } },
           { description: { $regex: keyword, $options: "i" } },
         ],
-      }).select("-photo");
+      })
+      .select("-photo");
     res.json(results);
   } catch (error) {
     console.log(error);
