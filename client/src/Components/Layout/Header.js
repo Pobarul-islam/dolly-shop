@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/auth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SearchInput from "../Form/SearchInput";
 const Header = () => {
   const handleLogout = () => {
     setAuth({
@@ -87,6 +88,7 @@ const Header = () => {
           Dolly shop
         </Link>
       </div>
+      <SearchInput/>
 
       <div className="flex-none text-white">
         <div className="navbar-center hidden lg:flex">
@@ -95,11 +97,11 @@ const Header = () => {
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
-            className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
+            className=" card card-compact dropdown-content w-52 bg-base-100 shadow"
           ></div>
         </div>
         <div className="dropdown dropdown-end text-black">
-          <label tabIndex={0} className="btn btn-ghost">
+          <label tabIndex={0}>
             <div className="w-102 btn rounded-full">{auth?.user?.name}</div>
           </label>
           <ul

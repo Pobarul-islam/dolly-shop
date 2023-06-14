@@ -134,7 +134,7 @@ const HomePage = () => {
           </div>
           <div className="flex flex-col-reverse">
             <button
-              className="btn btn-warning"
+              className="btn w-52 mt-3 btn-warning"
               onClick={() => window.location.reload()}
             >
               Reset filters

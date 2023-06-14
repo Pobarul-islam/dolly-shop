@@ -102,7 +102,7 @@ export const productController = async (req, res) => {
     const product = await productModel.findById(req.params.pid).select("photo");
     if (product.photo.data) {
       res.set("Content-type", product.photo.contentType);
-      return res.status(700).send(product.photo.data);
+      return res.status(200).send(product.photo.data);
     }
   } catch (error) {
     console.log(error);
@@ -244,6 +244,28 @@ export const productListController = async (req, res) => {
     res.status(400).send({
       success: false,
       message: "Error in per page ctrl",
+      error,
+    });
+  }
+};
+
+// search product
+export const searchProductController = async (req, res) => {
+  try {
+    const { keyword } = req.params;
+    const results = await productModel
+      .find({
+        $or: [
+          { name: { $regex: keyword, $options: "i" } },
+          { description: { $regex: keyword, $options: "i" } },
+        ],
+      }).select("-photo");
+    res.json(results);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Enter in search product api",
       error,
     });
   }
