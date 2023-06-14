@@ -16,7 +16,6 @@ const HomePage = () => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  
 
   // get all category
   const getAllCategory = async () => {
@@ -167,7 +166,10 @@ const HomePage = () => {
                   <p>$ {p.price} </p>
                   <div className="row flex gap-4">
                     <div className="card-actions justify-end">
-                      <button onClick={()=>navigate(`/product/${p.slug}`)} className="btn btn-primary uppercase">
+                      <button
+                        onClick={() => navigate(`/product/${p.slug}`)}
+                        className="btn btn-primary uppercase"
+                      >
                         More Details
                       </button>
                     </div>

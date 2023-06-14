@@ -20,9 +20,12 @@ const Products = () => {
   };
 
   //lifecycle method
+  
   useEffect(() => {
     getAllProducts();
   }, []);
+
+
   return (
     <Layout> 
       <div className="flex">
