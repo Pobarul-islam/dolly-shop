@@ -4,7 +4,10 @@ import { useAuth } from "../../Context/auth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SearchInput from "../Form/SearchInput";
+import useCategory from "../../hooks/useCategory";
 const Header = () => {
+  const [auth, setAuth] = useAuth();
+  const categories = useCategory();
   const handleLogout = () => {
     setAuth({
       ...auth,
@@ -14,7 +17,7 @@ const Header = () => {
     localStorage.removeItem("auth");
     toast.success("Logout successfully");
   };
-  const [auth, setAuth] = useAuth();
+
   const menuItems = (
     <>
       <li>
@@ -25,7 +28,23 @@ const Header = () => {
       </li>
 
       <li>
-        <Link to="/category">category</Link>
+        <details className="dropdown ">
+          <summary className="">Categories</summary>
+          {categories?.map((c) => (
+            <ul key={c._id} className=" dropdown-content">
+              <li>
+                <Link to="#">a</Link>
+              </li>
+              <li>
+                <Link to="#">a</Link>
+              </li>
+              <li>
+                <Link to="#">a</Link>
+              </li>
+           
+            </ul>
+          ))}
+        </details>
       </li>
       {!auth.user ? (
         <>
