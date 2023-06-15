@@ -26,7 +26,7 @@ const SearchInput = () => {
           placeholder="Search"
           className="input input-bordered input-primary w-full max-w-xs"
           value={values.keyword}
-          onChange={(e) => setValues({ ...values, keyword: e.target.value })}
+          onChange={(e) => setValues({ ...values, keyword:e.target.value })}
               />
               
       </div>

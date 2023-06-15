@@ -37,7 +37,9 @@ const ProductDetails = () => {
           <h4>Name: {product.name} </h4>
           <h4>Description: {product.description} </h4>
           <h4>Price: {product.price}</h4>
-          {/* <h4>Cetegory: {product.category.name}</h4> */}
+          <h4>
+            Cetegory: {product.category && product.category.name}
+          </h4>
         </div>
 
         <div className="col-3">
