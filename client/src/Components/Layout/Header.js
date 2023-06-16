@@ -28,23 +28,7 @@ const Header = () => {
       </li>
 
       <li>
-        <details className="dropdown ">
-          <summary className="">Categories</summary>
-          {categories?.map((c) => (
-            <ul key={c._id} className=" dropdown-content">
-              <li>
-                <Link to="#">a</Link>
-              </li>
-              <li>
-                <Link to="#">a</Link>
-              </li>
-              <li>
-                <Link to="#">a</Link>
-              </li>
-           
-            </ul>
-          ))}
-        </details>
+       <Link to="/category">Category</Link>
       </li>
       {!auth.user ? (
         <>
@@ -120,9 +104,9 @@ const Header = () => {
           ></div>
         </div>
         <div className="dropdown dropdown-end text-black">
-          <label tabIndex={0} className="btn btn-ghost">
+          <ul tabIndex={0} className="btn btn-ghost">
             <div className="w-102 btn rounded-full">{auth?.user?.name}</div>
-          </label>
+          </ul>
           <ul
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
