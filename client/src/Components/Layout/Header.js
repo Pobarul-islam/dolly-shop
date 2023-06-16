@@ -28,7 +28,18 @@ const Header = () => {
       </li>
 
       <li>
-       <Link to="/category">Category</Link>
+        <details className="dropdown ">
+          <summary className="">Categories</summary>
+          {categories?.map((c) => (
+            <ul key={c._id} className="w-32 bg-slate-700 rounded-2xl dropdown-content">
+              <li>
+                {categories?.map((c) => (
+                  <h1>{c.name} </h1>
+                ))}
+              </li>
+            </ul>
+          ))}
+        </details>
       </li>
       {!auth.user ? (
         <>
