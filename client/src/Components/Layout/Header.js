@@ -34,9 +34,10 @@ const Header = () => {
             <ul key={c._id} className="w-32 bg-slate-700 rounded-2xl dropdown-content">
               <li>
                 {categories?.map((c) => (
-                  <h1>{c.name} </h1>
+                  <Link to={ `/category/${c.slug}`}>{c.name} </Link>
                 ))}
               </li>
+         
             </ul>
           ))}
         </details>
