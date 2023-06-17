@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../Components/Layout/Layout";
-import { useAuth } from "../Context/auth";
 import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../Components/Prices";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../Context/Cart";
+import { toast } from "react-toastify";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [auth, setAuth] = useAuth();
+
+  const [cart, setCart] = useCart()
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -146,7 +148,7 @@ const HomePage = () => {
         </div>
         <div className="col-2 m-2">
           <h1 className="text-center text-2xl">All Products</h1>
-          {JSON.stringify(radio, null, 4)};
+         
           <div className="row grid lg:grid-cols-3 gap-5 md:grid-cols-2 sm:grid-cols-1">
             {products.map((p) => (
               <div
@@ -174,7 +176,10 @@ const HomePage = () => {
                       </button>
                     </div>
                     <div className="card-actions justify-end">
-                      <button className="btn btn-primary uppercase">
+                      <button onClick={() => {
+                        setCart([...cart, p])
+                        toast.success("Item added to cart")
+                      }} className="btn btn-primary uppercase">
                         Add to Cart
                       </button>
                     </div>
