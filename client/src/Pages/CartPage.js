@@ -9,18 +9,18 @@ const CartPage = () => {
   const [cart, setCart] = useCart();
   const navigate = useNavigate();
 
-  // delete item 
+  // delete item
   const removeCartItem = (pid) => {
     try {
-      let myCart = [...cart]
-      let index = myCart.findIndex(item => item._id === pid)
-      myCart.splice(index, 1)
-      setCart(myCart)
+      let myCart = [...cart];
+      let index = myCart.findIndex((item) => item._id === pid);
+      myCart.splice(index, 1);
+      setCart(myCart);
+      localStorage.setItem("cart", JSON.stringify(myCart));
     } catch (error) {
-      console.log(error)
-      
+      console.log(error);
     }
-  }
+  };
   return (
     <Layout>
       <div className="row">
@@ -30,7 +30,7 @@ const CartPage = () => {
           </h1>
         </div>
         <h4 className="text-center text-2xl">
-          {cart?.length > 1
+          {cart?.length
             ? `You have ${cart.length} items in your cart ${
                 auth?.token ? "" : "Please login to checkout"
               }`
@@ -53,12 +53,22 @@ const CartPage = () => {
                   <h4>Name: {p.name} </h4>
                   <p>Description: {p.description.substring(0, 30)} </p>
                   <p>Price: ${p.price} </p>
-                  <button onClick={()=>removeCartItem(p._id)} className="btn btn-warning">Remove</button>
+                  <button
+                    onClick={() => removeCartItem(p._id)}
+                    className="btn btn-warning"
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
             ))}{" "}
           </div>
-          <div className="grid-cols-6">checkout | Payment</div>
+          <div className="grid-cols-6 text-center">
+            <h2>Cart Summary</h2>
+            <p>Total | Checkout | Payment</p>
+            <hr />
+            <h3>Total</h3>
+          </div>
         </div>
       </div>
     </Layout>

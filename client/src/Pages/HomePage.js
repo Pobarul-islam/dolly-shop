@@ -177,7 +177,8 @@ const HomePage = () => {
                     </div>
                     <div className="card-actions justify-end">
                       <button onClick={() => {
-                        setCart([...cart, p])
+                        setCart([...cart, p]);
+                        localStorage.setItem('cart', JSON.stringify([...cart, p]) )
                         toast.success("Item added to cart")
                       }} className="btn btn-primary uppercase">
                         Add to Cart
