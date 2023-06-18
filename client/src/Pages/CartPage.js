@@ -9,6 +9,26 @@ const CartPage = () => {
   const [cart, setCart] = useCart();
   const navigate = useNavigate();
 
+  // total price
+  const totalPrice = () => {
+  try {
+    let total = 0;
+    cart?.map((item) => {
+      total = total + item.price;
+    });
+    return total.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    })
+  } catch (error) {
+    console.log(error)
+    
+  }
+}
+  
+
+
+
   // delete item
   const removeCartItem = (pid) => {
     try {
@@ -21,6 +41,10 @@ const CartPage = () => {
       console.log(error);
     }
   };
+
+
+
+  
   return (
     <Layout>
       <div className="row">
@@ -67,7 +91,7 @@ const CartPage = () => {
             <h2>Cart Summary</h2>
             <p>Total | Checkout | Payment</p>
             <hr />
-            <h3>Total</h3>
+            <h3 className="m-5">Total: { totalPrice()}</h3>
           </div>
         </div>
       </div>
