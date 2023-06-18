@@ -28,7 +28,7 @@ const Profile = () => {
         phone,
         address,
       });
-      if (data?.errro) {
+      if (data?.error) {
         toast.error(data?.error);
       } else {
         setAuth({ ...auth, user: data?.updatedUser });
@@ -50,6 +50,7 @@ const Profile = () => {
     setPhone(phone);
     setEmail(email);
     setAddress(address);
+
   }, [auth?.user]);
   return (
     <Layout title="Your Profile">
@@ -66,7 +67,7 @@ const Profile = () => {
                   type="text"
                   placeholder="Name"
                   className="input input-bordered"
-                  required
+                  
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -76,7 +77,7 @@ const Profile = () => {
                   type="email"
                   placeholder="Email"
                   className="input input-bordered"
-                  required
+                  
                   disabled
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -87,7 +88,7 @@ const Profile = () => {
                   type="text"
                   placeholder="Address"
                   className="input input-bordered"
-                  required
+                  
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                 />
@@ -97,7 +98,7 @@ const Profile = () => {
                   type="text"
                   placeholder="Phone"
                   className="input input-bordered"
-                  required
+                  
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                 />
@@ -109,6 +110,7 @@ const Profile = () => {
                   placeholder="Password"
                   className="input input-bordered"
                   value={password}
+                  
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>

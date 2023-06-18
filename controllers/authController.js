@@ -1,6 +1,6 @@
-import { hash } from "bcrypt";
+
 import userModel from "../models/userModel.js";
-import { comparePassword, hashedPassword } from "../helpers/authHelpers.js";
+import { comparePassword, hashPassword } from "../helpers/authHelpers.js";
 import JWT from "jsonwebtoken";
 export const registerController = async (req, res) => {
   try {
@@ -38,7 +38,7 @@ export const registerController = async (req, res) => {
     }
 
     // register user
-    const hashePassword = await hashedPassword(password);
+ const hashedPassword = await hashPassword(password);
 
     // save
     const user = await new userModel({
@@ -47,7 +47,7 @@ export const registerController = async (req, res) => {
       phone,
       address,
       answer,
-      password: hashePassword,
+      password: hashedPassword,
     }).save();
     res.status(201).send({
       success: true,
@@ -138,7 +138,7 @@ export const forgotPasswordController = async (req, res) => {
         message: "Wrong Email Or Answer",
       });
     }
-    const hashed = await hashedPassword(newPassword);
+    const hashed = await hashPassword(newPassword);
     await userModel.findByIdAndUpdate(user._id, { password: hashed });
     res.status(200).send({
       success: true,
@@ -174,6 +174,7 @@ export const updateProfileController = async (req, res) => {
       {
         name: name || user.name,
         password: hashedPassword || user.password,
+
         phone: phone || user.phone,
         address: address || user.address,
       },
