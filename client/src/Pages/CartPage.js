@@ -11,23 +11,19 @@ const CartPage = () => {
 
   // total price
   const totalPrice = () => {
-  try {
-    let total = 0;
-    cart?.map((item) => {
-      total = total + item.price;
-    });
-    return total.toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-    })
-  } catch (error) {
-    console.log(error)
-    
-  }
-}
-  
-
-
+    try {
+      let total = 0;
+      cart?.map((item) => {
+        total = total + item.price;
+      });
+      return total.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // delete item
   const removeCartItem = (pid) => {
@@ -42,9 +38,6 @@ const CartPage = () => {
     }
   };
 
-
-
-  
   return (
     <Layout>
       <div className="row">
@@ -91,7 +84,38 @@ const CartPage = () => {
             <h2>Cart Summary</h2>
             <p>Total | Checkout | Payment</p>
             <hr />
-            <h3 className="m-5">Total: { totalPrice()}</h3>
+            <h3 className="m-5">Total: {totalPrice()}</h3>
+            {auth?.user?.address ? (
+              <>
+                <div>
+                  <h4>Current address: {auth?.user?.address}</h4>
+     
+                  <button
+                    onClick={() => navigate("/dashboard/user/profile")}
+                    className="btn"
+                  >
+                    Update address
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="mb-3">
+                {auth?.token ? (
+                  <button
+                    onClick={() => navigate("/dashboard/user/profile")}
+                    className="btn"
+                  >
+                    Update address
+                  </button>
+                ) : (
+                      <button onClick={() => navigate("/login", {
+                    state: '/cart',
+                  })} className="btn">
+                    Please to Login checkout
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
