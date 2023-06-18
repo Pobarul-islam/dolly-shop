@@ -13,6 +13,8 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [answer, setAnswer] = useState("");
   const navigate = useNavigate();
+
+  
   // from functionality
 
   const handleOnSubmit = async (e) => {
