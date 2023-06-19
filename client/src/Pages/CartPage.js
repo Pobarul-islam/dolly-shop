@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../Components/Layout/Layout";
 import { useCart } from "../Context/Cart";
 import { useAuth } from "../Context/auth";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CartPage = () => {
+  const [clientToken, setClientToken] = useState("");
   const [auth, setAuth] = useAuth();
   const [cart, setCart] = useCart();
   const navigate = useNavigate();
-
+const [instanse, setInstance] = useState(false)
   // total price
   const totalPrice = () => {
     try {
@@ -38,6 +40,19 @@ const CartPage = () => {
     }
   };
 
+  // get payment gateway token
+  const getToken = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/product/braintree/token");
+      setClientToken(data?.clientToken);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getToken();
+
+},[auth?.token])
   return (
     <Layout>
       <div className="row">
@@ -89,7 +104,7 @@ const CartPage = () => {
               <>
                 <div>
                   <h4>Current address: {auth?.user?.address}</h4>
-     
+
                   <button
                     onClick={() => navigate("/dashboard/user/profile")}
                     className="btn"
@@ -108,13 +123,19 @@ const CartPage = () => {
                     Update address
                   </button>
                 ) : (
-                      <button onClick={() => navigate("/login", {
-                    state: '/cart',
-                  })} className="btn">
+                  <button
+                    onClick={() =>
+                      navigate("/login", {
+                        state: "/cart",
+                      })
+                    }
+                    className="btn"
+                  >
                     Please to Login checkout
                   </button>
                 )}
-              </div>
+                </div>
+                
             )}
           </div>
         </div>
