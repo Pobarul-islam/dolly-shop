@@ -1,6 +1,7 @@
 import express from "express";
 import {
   forgotPasswordController,
+  getOrderController,
   loginController,
   registerController,
   testController,
@@ -37,5 +38,6 @@ router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
 
 router.put('/profile', requireSignIn, updateProfileController)
 
-
+// orders 
+router.get("/orders", requireSignIn, getOrderController)
 export default router;
