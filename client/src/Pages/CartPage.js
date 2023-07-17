@@ -170,7 +170,7 @@ const CartPage = () => {
                         flow: "vault",
                       },
                     }}
-                    onInstance={(instance) => setInstance(instance)}
+                    onInstance={instance => setInstance(instance)}
                   />
 
                   <button

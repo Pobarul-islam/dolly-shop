@@ -4,7 +4,7 @@ import fs from "fs";
 import categoryModel from "../models/categoryModel.js";
 import braintree from "braintree";
 import orderModel from '../models/categoryModel.js'
-import { response } from "express";
+// import { response } from "express";
 import dotenv from "dotenv"
 
 
@@ -358,8 +358,8 @@ export const brainTreePaymentController = async (req, res) => {
   try {
     const { cart, nonce } = req.body;
     let total = 0;
-    cart.map((i) => (total += i.price));
-    let newTransction = gateway.transaction.sale({
+    cart.map((i) => { total += i.price });
+    let newTransaction = gateway.transaction.sale({
       amount: total,
       paymentMethodNonce: nonce,
       options: {

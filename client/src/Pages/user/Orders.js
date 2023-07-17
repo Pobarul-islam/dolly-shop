@@ -19,19 +19,19 @@ function Orders() {
   }
 
   useEffect(() => {
-    if (auth?.token) getOrders();
+    getOrders();
   },[auth?.token])
   return (
     <Layout title={"Your orders"}>
       <div className="grid lg:grid-cols-4 gap-40">
-    
         <div>
-         
           <UserMenu />
         </div>
-        <div>
+        <div className="mt-5">
           <h2>All orders</h2>
-          <p>{JSON.stringify(orders, null, 4)} </p>
+          {orders.map((item) => {
+            return <div key={item.id}>I am one Object in the Array {item}</div>;
+          })}
         </div>
       </div>
     </Layout>
